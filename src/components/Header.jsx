@@ -1,7 +1,11 @@
 import { AppBar, Toolbar, Box, InputBase, styled } from '@mui/material';
-import { Menu as MenuIcon, Tune, HelpOutlineOutlined, SettingsOutlined, 
-    AppsOutlined, AccountCircleOutlined, Search } from '@mui/icons-material'
-
+import {
+    Menu as MenuIcon, Tune, HelpOutlineOutlined, SettingsOutlined,
+    AppsOutlined, AccountCircleOutlined, Search
+} from '@mui/icons-material'
+import { useState } from 'react';
+import * as React from 'react';
+import Button from 'react-bootstrap/Button';
 import { gmailLogo } from '../constants/constant';
 import { useNavigate } from 'react-router-dom';
 
@@ -33,31 +37,45 @@ const OptionsWrapper = styled(Box)`
     & > svg {
         margin-left: 20px;
     }
-`
+`;
 
 const Header = ({ toggleDrawer }) => {
     let navigate = useNavigate()
+    const [isCardOpen, setCardOpen] = useState(false);
 
     return (
         <StyledAppBar position="static">
             <Toolbar>
                 <MenuIcon color="action" onClick={toggleDrawer} />
-                <img src={gmailLogo} alt="logo" style={{ width: 110, marginLeft: 15, cursor:'pointer' }} onClick={()=>navigate('/routes.emails.inbox')}/>
+                <img src={gmailLogo} alt="logo" style={{ width: 110, marginLeft: 15, cursor: 'pointer' }} onClick={() => navigate('/routes.emails.inbox')} />
                 <SearchWrapper>
                     <Search color="action" />
                     <InputBase />
-                    <Tune  color="action"/>
+                    <Tune color="action" />
                 </SearchWrapper>
 
                 <OptionsWrapper>
                     <HelpOutlineOutlined color="action" />
                     <SettingsOutlined color="action" />
                     <AppsOutlined color="action" />
-                    <AccountCircleOutlined color="action" />
-               </OptionsWrapper>
+                    <AccountCircleOutlined color="action" onClick={() => setCardOpen(!isCardOpen)} style={{ cursor: 'pointer' }} />
+                    {isCardOpen && (
+                        <div className='admin' style={{  padding: '15px', marginTop: '25px', position:'fixed' }}>
+                            <Button style={{marginLeft:'50px'}} variant="outline-info" onClick={()=>navigate('/signup')}  >SignUp</Button>
+                            <Button style={{marginLeft:'50px'}} variant="outline-info" onClick={()=>navigate('/signin')} >Login</Button>
+                            <p >To Access you need to create an account</p>
+                        </div>
+                    )}
+                </OptionsWrapper>
             </Toolbar>
-        </StyledAppBar>
+        </StyledAppBar >
+
     )
 }
 
 export default Header;
+
+
+
+
+

@@ -16,6 +16,8 @@ const router = createBrowserRouter(
       </Route>
 
       <Route path={routes.invalid.path} element={<Navigate to={`${routes.emails.path}/inbox`} />} />
+      <Route path={routes.signup.path} element={<routes.signup.element />} errorElement={<ErrorComponent />} />
+      <Route path={routes.signin.path} element={<routes.signin.element />} errorElement={<ErrorComponent />} />
     </Route>
   )
 )
@@ -23,6 +25,7 @@ const router = createBrowserRouter(
 function App() {
   return (
     <Suspense fallback={<SuspenseLoader />}>
+
       <DataProvider>
         <RouterProvider router={router} />
       </DataProvider>

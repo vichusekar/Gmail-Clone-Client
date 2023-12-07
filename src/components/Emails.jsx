@@ -19,11 +19,9 @@ const Emails = () => {
     const deleteEmailsService = useApi(API_URLS.deleteEmails);
     const moveEmailsToBin = useApi(API_URLS.moveEmailsToBin);
 
-    console.log(getEmailsService)
-
     useEffect(() => {
         getEmailsService.call({}, type);
-    }, [type, starredEmail])
+    }, [starredEmail, type])
 
     const selectAllEmails = (e) => {
         if (e.target.checked) {
@@ -44,7 +42,7 @@ const Emails = () => {
     }
 
     return (
-        <Box style={openDrawer ? { marginLeft: 250, width: '100%' } : { width: '100%' } }>
+        <Box style={openDrawer ? { marginLeft: 250, width: '100%' } : { width: '100%' }}>
             <Box style={{ padding: '20px 10px 0 10px', display: 'flex', alignItems: 'center' }}>
                 <Checkbox size="small" onChange={(e) => selectAllEmails(e)} />
                 <DeleteOutline onClick={(e) => deleteSelectedEmails(e)} />
@@ -52,19 +50,19 @@ const Emails = () => {
             <List>
                 {
                     getEmailsService?.response?.emails.map(email => (
-                        <Email 
-                            email={email} 
+                        <Email
+                            email={email}
                             key={email.id}
-                            setStarredEmail={setStarredEmail} 
+                            setStarredEmail={setStarredEmail}
                             selectedEmails={selectedEmails}
                             setSelectedEmails={setSelectedEmails}
                         />
                     ))
                 }
-            </List> 
+            </List>
             {
                 getEmailsService?.response?.length === 0 &&
-                    <NoMails message={EMPTY_TABS[type]} />
+                <NoMails message={EMPTY_TABS[type]} />
             }
         </Box>
     )

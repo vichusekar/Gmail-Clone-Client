@@ -1,5 +1,3 @@
-
-
 import { Box, Typography, styled } from '@mui/material';
 import { useOutletContext, useLocation } from 'react-router-dom';
 import { emptyProfilePic } from '../constants/constant';
@@ -54,14 +52,14 @@ const Date = styled(Typography)({
 const ViewEmail = () => {
 
     const { openDrawer } = useOutletContext();
-    
+
     const { state } = useLocation();
     const { email } = state;
 
     return (
-        <Box style={openDrawer ? { marginLeft: 250, width: '100%' } : { width: '100%' } }>
+        <Box style={openDrawer ? { marginLeft: 250, width: '100%' } : { width: '100%' }}>
             <IconWrapper>
-                <ArrowBack fontSize='small' color="action" onClick={() => window.history.back() } />
+                <ArrowBack fontSize='small' color="action" onClick={() => window.history.back()} />
                 <Delete fontSize='small' color="action" style={{ marginLeft: 40 }} />
             </IconWrapper>
             <Subject>{email.subject} <Indicator component="span">Inbox</Indicator></Subject>
@@ -69,14 +67,14 @@ const ViewEmail = () => {
                 <Image src={emptyProfilePic} alt="profile" />
                 <Container>
                     <Box>
-                        <Typography>    
-                            {email.to.split('@')[0]} 
+                        <Typography>
+                            {email.to.split('@')[0]}
                             <Box component="span">&nbsp;&#60;{email.to}&#62;</Box>
                         </Typography>
                         <Date>
                             {(new window.Date(email.date)).getDate()}&nbsp;
                             {(new window.Date(email.date)).toLocaleString('default', { month: 'long' })}&nbsp;
-                            {(new window.Date(email.date)).getFullYear()} 
+                            {(new window.Date(email.date)).getFullYear()}
                         </Date>
                     </Box>
                     <Typography style={{ marginTop: 20 }}>{email.body}</Typography>

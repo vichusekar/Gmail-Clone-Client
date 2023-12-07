@@ -1,6 +1,5 @@
 import { useState } from 'react';
-
-import { Dialog, styled, Typography, Box, InputBase, TextField, Button } from '@mui/material'; 
+import { Dialog, styled, Typography, Box, InputBase, TextField, Button } from '@mui/material';
 import { Close, DeleteOutline } from '@mui/icons-material';
 import useApi from '../hooks/useApi';
 import { API_URLS } from '../services/api.urls';
@@ -74,26 +73,27 @@ const ComposeMail = ({ open, setOpenDrawer }) => {
         if (window.Email) {
             window.Email.send({
                 ...config,
-                To : data.to,
-                From : "rajasekarvignesh093@gmail.com",
-                Subject : data.subject,
-                Body : data.body
+                To: data.to,
+                From: "rajasekarvignesh093@gmail.com",
+                Subject: data.subject,
+                Body: data.body
             }).then(
                 message => alert(message)
             );
         }
 
         const payload = {
-            to : data.to,
-            from : "rajasekarvignesh093@gmail.com",
-            subject : data.subject,
-            body : data.body,
+            to: data.to,
+            from: "rajasekarvignesh093@gmail.com",
+            subject: data.subject,
+            body: data.body,
             date: new Date(),
             image: '',
             name: 'Vignesh R',
             starred: false,
             type: 'sent'
         }
+            
 
         sentEmailService.call(payload);
 
@@ -109,10 +109,10 @@ const ComposeMail = ({ open, setOpenDrawer }) => {
         e.preventDefault();
 
         const payload = {
-            to : data.to,
-            from : "rajasekarvignesh093@gmail.com",
-            subject : data.subject,
-            body : data.body,
+            to: data.to,
+            from: "rajasekarvignesh093@gmail.com",
+            subject: data.subject,
+            body: data.body,
             date: new Date(),
             image: '',
             name: 'Vignesh R',
@@ -143,7 +143,7 @@ const ComposeMail = ({ open, setOpenDrawer }) => {
                 <InputBase placeholder='Recipients' name="to" onChange={(e) => onValueChange(e)} value={data.to} />
                 <InputBase placeholder='Subject' name="subject" onChange={(e) => onValueChange(e)} value={data.subject} />
             </RecipientWrapper>
-            <TextField 
+            <TextField
                 multiline
                 rows={15}
                 sx={{ '& .MuiOutlinedInput-notchedOutline': { border: 'none' } }}
